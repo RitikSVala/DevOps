@@ -1,0 +1,10 @@
+{% extends "layout.html"%}<!-- Declare the parent template (layout.html)-->
+{% block data %}
+<h1>Home Page!</h1>
+<br>
+    <!-- Code Block For Pulling & Displaying Data -->
+    {% for upload in uploads %}
+        <h1>{{upload.header}}</h1>
+        <p>Uploaded On {{upload.date_uploaded}} By {{upload.user}} </p>
+    {% endfor %}
+{% endblock data %}
