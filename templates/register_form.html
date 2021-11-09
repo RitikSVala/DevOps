@@ -1,0 +1,34 @@
+{% extends "layout.html"%}<!-- Declare the parent template (layout.html)-->
+{% block data %}
+    <h2> Welcome To Our Registration Page </h2>
+    <!-- Token (form.hidden_tag) gets added to make forms safer to prevent certain types of attacks.  -->
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border_bottom mb-4">Sign Up Today</legend>
+                <!-- Form Groups, "Label" prints from user field-->
+            <div class="form-group">
+                {{form.user_name.label(class="form-control-label")}}
+                {{form.user_name(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.user_email.label(class="form-control-label")}}
+                {{form.user_email(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.user_password.label(class="form-control-label")}}
+                {{form.user_password(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{form.confirm_password.label(class="form-control-label")}}
+                {{form.confirm_password(class="form-control form-control-lg")}}
+            </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+
+        </form>
+    </div>
+{% endblock data %}
