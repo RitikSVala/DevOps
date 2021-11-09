@@ -1,10 +1,18 @@
 {% extends "layout.html"%}<!-- Declare the parent template (layout.html)-->
 {% block data %}
-<h1>Home Page!</h1>
-<br>
     <!-- Code Block For Pulling & Displaying Data -->
     {% for upload in uploads %}
-        <h1>{{upload.header}}</h1>
-        <p>Uploaded On {{upload.date_uploaded}} By {{upload.user}} </p>
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ upload.creator }}</a>
+          </div>
+          <h1><a class="article-title" href="#">{{ upload.header }}</a></h1>
+          <small class="text-muted">{{ upload.date_uploaded }}</small>
+          <p class="article-content">{{ upload.caption }}</p>
+
+        </div>
+    </article>
+
     {% endfor %}
 {% endblock data %}

@@ -1,6 +1,13 @@
-<!-- Layout format for all pages throughout webpages.-->
+<!-- Layout format for all pages throughout webpages. (Parent Tempalte)-->
 <html>
 <head>
+    <!-- W3 stylesheets -->
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
      <!-- Required meta tags -->
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,12 +16,43 @@
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title> DevOps Forum</title>
 </head>
-<body>
 
-    <div class="container">
-    <!--Block that will allow child templates to overwrite -->
-    {% block data %} {% endblock %}
-</div>
+
+<body>
+<!-- Navigation Bar -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="#home" class="w3-bar-item w3-button w3-wide">DevOps Forum</a>
+      <a href="#home" class="w3-bar-item w3-button w3-wide">HOME</a>
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <!-- Right Side Of Navigation Bar -->
+      <div class="w3-right w3-hide-small">
+        <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
+        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> REGISTER</a>
+        <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      </div>
+      <br>
+      <br>
+      <br>
+      <!--Main container on the right hand side -->
+    <main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8">
+      {% block data %}{% endblock %}
+    </div>
+    <div class="col-md-4">
+      <div class="content-section">
+        <p class='text-muted'>Main Side Tab:
+          <ul class="list-group">
+              <!-- List of items -->
+            <li class="list-group-item list-group-item-light">Latest Posts</li>
+            <li class="list-group-item list-group-item-light">Announcements</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
