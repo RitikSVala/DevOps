@@ -1,6 +1,7 @@
 from flask import Flask , render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 
@@ -22,7 +23,23 @@ class User(db.Profile):
     ##String with a max char value of "50", 
     uesr_password = db.column(db.string(50), nullable=False)
 
-    ##
+    ##Defines how the object is printed
+    def __repr__(self):
+        return f"User: ('{self.user_name}', '{self.user_email}')"
+
+##Upload class that will hold the posts made onto webpage
+class Upload(db.Profile):
+    ##Unique number to define different users also the primary key ("primary_key=True")
+    id = db.column(db.int, primary_key=True)
+    ##Header for each post can only be 120 char long and must have data inputed.
+    header = db.column(db.string(120), nullable = False)
+    ##Date and time of when the post was made, saves whatever the current time on system is as the date and time
+    date_uploaded = db.column(db.DateTime, nullable = False, default = datetime.utcnow)
+    caption = db.column(db.Text, nullable = False)
+
+    ##Defines how the object is printed
+    def __repr__(self):
+        return f"Upload: ('{self.header}', '{self.date_uploaded}')"
 
 
 ##Temporary Data Set
