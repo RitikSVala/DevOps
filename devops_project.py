@@ -1,15 +1,28 @@
 from flask import Flask , render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
+
+
+
 app = Flask(__name__) ##Module Name = __name__ = __main__
-
-
 ##Secret Key to protect against modifying cookies etc. (Set secret key for the appication)
 app.config["SECRET_KEY"] = "d7545bde35264afcc836e153c2deabce"
 ##SQLALCHEMY - Set path
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///devops.db"
 
 db = SQLAlchemy(app)
+
+class User(db.Profile):
+    ##Unique number to define different users also the primary key ("primary_key=True")
+    id = db.column(db.int, primary_key=True)
+    ##String with a max char value of "20", user_names need to be unique so pass in "unique=true", 
+    user_name = db.column(db.string(20), unique=True, nullable=False)
+    ##String with a max char value of "20", user_names need to be unique so pass in "unique=true", 
+    user_email = db.column(db.string(100), unique=True, nullable=False)
+    ##String with a max char value of "50", 
+    uesr_password = db.column(db.string(50), nullable=False)
+
+    ##
 
 
 ##Temporary Data Set
