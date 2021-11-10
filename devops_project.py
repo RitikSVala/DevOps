@@ -20,8 +20,8 @@ class User(db.Model):
     user_name = db.Column(db.String(20), unique=True, nullable=False)
     ##String with a max char value of "20", user_names need to be unique so pass in "unique=true"
     user_email = db.Column(db.String(100), unique=True, nullable=False)
-    ##String with a max char value of "50"
-    uesr_password = db.Column(db.String(50), nullable=False)
+    ##String with a max char value of "60"
+    user_password = db.Column(db.String(60), nullable=False)
     ##uploads attribute is related to the upload model
     uploads= db.relationship("Upload", backref="creator", lazy=True)
 
