@@ -1,0 +1,78 @@
+{% extends "layout.html"%}<!-- Declare the parent template (layout.html)-->
+{% block data %}
+    <h2> Welcome To Our Registration Page </h2>
+    <!-- Token (form.hidden_tag) gets added to make forms safer to prevent certain types of attacks.  -->
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border_bottom mb-4">Sign Up Today</legend>
+                <!-- Form Groups, "Label" prints from user field-->
+            <div class="form-group">
+                {{form.user_name.label(class="form-control-label")}}
+                <!-- If form has errors then print out form field and print the errors-->
+                {% if form.user_name.errors %}
+                {{form.user_name(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid_feedback">
+                    {% for error in form.user_name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                {% else %}
+                    {{form.user_name(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{form.user_email.label(class="form-control-label")}}
+                 <!-- If form has errors then print out form field and print the errors-->
+                 {% if form.user_email.errors %}
+                 {{form.user_email(class="form-control form-control-lg is-invalid")}}
+                 <div class="invalid_feedback">
+                     {% for error in form.user_email.errors %}
+                         <span>{{ error }}</span>
+                         {% endfor %}
+                 </div>
+                 <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                 {% else %}
+                     {{form.user_email(class="form-control form-control-lg")}}
+                 {% endif %}
+            </div>
+            <div class="form-group">
+                {{form.user_password.label(class="form-control-label")}}
+                 <!-- If form has errors then print out form field and print the errors-->
+                 {% if form.user_password.errors %}
+                 {{form.user_password(class="form-control form-control-lg is-invalid")}}
+                 <div class="invalid_feedback">
+                     {% for error in form.user_password.errors %}
+                         <span>{{ error }}</span>
+                         {% endfor %}
+                 </div>
+                 <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                 {% else %}
+                     {{form.user_password(class="form-control form-control-lg")}}
+                 {% endif %}
+            </div>
+            <div class="form-group">
+                {{form.confirm_password.label(class="form-control-label")}}
+                 <!-- If form has errors then print out form field and print the errors-->
+                 {% if form.confirm_password.errors %}
+                 {{form.confirm_password(class="form-control form-control-lg is-invalid")}}
+                 <div class="invalid_feedback">
+                     {% for error in form.confirm_password.errors %}
+                         <span>{{ error }}</span>
+                         {% endfor %}
+                 </div>
+                 <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                 {% else %}
+                     {{form.confirm_password(class="form-control form-control-lg")}}
+                 {% endif %}
+            </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+
+        </form>
+    </div>
+{% endblock data %}
