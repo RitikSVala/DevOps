@@ -10,19 +10,63 @@
                 <!-- Form Groups, "Label" prints from user field-->
             <div class="form-group">
                 {{form.user_name.label(class="form-control-label")}}
-                {{form.user_name(class="form-control form-control-lg")}}
+                <!-- If form has errors then print out form field and print the errors-->
+                {% if form.user_name.errors %}
+                {{form.user_name(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid_feedback">
+                    {% for error in form.user_name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                {% else %}
+                    {{form.user_name(class="form-control form-control-lg")}}
+                {% endif %}
             </div>
             <div class="form-group">
                 {{form.user_email.label(class="form-control-label")}}
-                {{form.user_email(class="form-control form-control-lg")}}
+                 <!-- If form has errors then print out form field and print the errors-->
+                 {% if form.user_email.errors %}
+                 {{form.user_email(class="form-control form-control-lg is-invalid")}}
+                 <div class="invalid_feedback">
+                     {% for error in form.user_email.errors %}
+                         <span>{{ error }}</span>
+                         {% endfor %}
+                 </div>
+                 <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                 {% else %}
+                     {{form.user_email(class="form-control form-control-lg")}}
+                 {% endif %}
             </div>
             <div class="form-group">
                 {{form.user_password.label(class="form-control-label")}}
-                {{form.user_password(class="form-control form-control-lg")}}
+                 <!-- If form has errors then print out form field and print the errors-->
+                 {% if form.user_password.errors %}
+                 {{form.user_password(class="form-control form-control-lg is-invalid")}}
+                 <div class="invalid_feedback">
+                     {% for error in form.user_password.errors %}
+                         <span>{{ error }}</span>
+                         {% endfor %}
+                 </div>
+                 <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                 {% else %}
+                     {{form.user_password(class="form-control form-control-lg")}}
+                 {% endif %}
             </div>
             <div class="form-group">
                 {{form.confirm_password.label(class="form-control-label")}}
-                {{form.confirm_password(class="form-control form-control-lg")}}
+                 <!-- If form has errors then print out form field and print the errors-->
+                 {% if form.confirm_password.errors %}
+                 {{form.confirm_password(class="form-control form-control-lg is-invalid")}}
+                 <div class="invalid_feedback">
+                     {% for error in form.confirm_password.errors %}
+                         <span>{{ error }}</span>
+                         {% endfor %}
+                 </div>
+                 <!-- If there are no errors then continue as normal (all validation checks met.)-->
+                 {% else %}
+                     {{form.confirm_password(class="form-control form-control-lg")}}
+                 {% endif %}
             </div>
             </fieldset>
             <div class="form-group">

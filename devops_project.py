@@ -1,10 +1,16 @@
 from flask import Flask , render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
+from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__) ##Module Name = __name__ = __main__
 
 
-##Secret Key to protect against modifying cookies etc. 
+##Secret Key to protect against modifying cookies etc. (Set secret key for the appication)
 app.config["SECRET_KEY"] = "d7545bde35264afcc836e153c2deabce"
+##SQLALCHEMY - Set path
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///devops.db"
+
+db = SQLAlchemy(app)
+
 
 ##Temporary Data Set
 uploads = [
@@ -47,6 +53,7 @@ def register():
     return render_template("register_form.html", form=form)
 
 ##Assigned URL for Login Page.
+##GET used to retrieve the data & POST to insert/update record.
 @app.route("/loginform", methods=['GET','POST'])
 def login():
     form = LoginForm()
