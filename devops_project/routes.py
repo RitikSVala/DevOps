@@ -1,6 +1,7 @@
 ##Redirect routes to webpages
 import bcrypt
 from flask import render_template, url_for, flash, redirect
+from flask_login.utils import login_required
 from devops_project import app, db, bcrypt
 from devops_project.forms import RegistrationForm, LoginForm
 from devops_project.models import User, Upload
@@ -78,3 +79,9 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("home"))
+
+#create posts and upload to page
+@app.route("/upload")
+@login_required
+def new_upload():
+    return render_template("Create_upload.html")

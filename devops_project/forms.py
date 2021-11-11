@@ -1,7 +1,9 @@
 ## form structures for login pages and registration pages
+from re import L
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+import devops_project
 from devops_project.models import User
 
 #Set boundries around what the user is able to input in each field to get rid of anomalies
@@ -25,12 +27,15 @@ class RegistrationForm(FlaskForm):
           user = User.query.filter_by(user_name=user_name.data).first()
           if user:
                raise ValidationError("This user name has already been used!")
-#Log In Form For Existing Users
+#Log In Form For Existing Users 
 class LoginForm(FlaskForm):
      user_email = StringField("Email", validators=[DataRequired(),Email()])
      user_password = PasswordField("Password", validators=[DataRequired()])
      submit = SubmitField("Log In")
      remember = BooleanField('Remember Me')
 
-
+class PostForm(FlaskForm):
+     header = StringField("Header", validators=[DataRequired()])
+     caption = TextAreaField("Content", validators=[DataRequired()])
+     submit = SubmitField("Upload")
 
