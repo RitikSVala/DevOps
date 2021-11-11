@@ -7,33 +7,12 @@ from devops_project.forms import RegistrationForm, LoginForm, UploadForm
 from devops_project.models import User, Upload
 from flask_login import login_user, current_user, logout_user
 
-##Temporary Data Set (HARDCODED)
-uploads = [
-        {
-            "user": "RITIK VALA",
-            "header": "Post No.1",
-            "caption": "First Post Caption",
-            "date_uploaded": "24 February, 2021"
-        },
-        {
-            "user": "JAMES BOND",
-            "header": "Post No.2",
-            "caption": "Second Post Caption",
-            "date_uploaded": "15 March, 2021"
-        }
-
-]
-
 
 ##Assigned URL for Home Page.
 @app.route("/")
 def home():
+    uploads = Upload.query.all()
     return render_template("home_page.html", uploads=uploads)
-
-##Assigned URL for About Page.
-@app.route("/about")
-def about():
-    return render_template("about_page.html")
 
 ##Assigned URL for Registration Page.
 ##Get used to retrieve the data & post to insert/update record.
@@ -87,7 +66,18 @@ def new_upload():
     form = UploadForm()
     ##Validation to see if user has successfully uploaded the post
     if form.validate_on_submit():
+        #create post onto the database
+        upload = Upload(header=form.header.data, caption=form.caption.data, creator=current_user)
+        db.session.add(upload)
+        db.session.commit()
         flash("Your post has been successfully uploaded!", "success")
         return redirect(url_for("home"))
     ##Redirect user to the webpage to create a post and uplaod it
     return render_template("Create_upload.html", form=form)
+
+
+##Make upload ID a part of the route and pass the variable as an integer
+@app.route("/upload/<int:upload_id>")
+def upload(upload_id):
+    upload = Upload.query.get(upload_id)
+    return render_template("upload.html", upload =upload)

@@ -1,18 +1,16 @@
 {% extends "layout.html"%}<!-- Declare the parent template (layout.html)-->
-  {% block data %}
-    <!-- Code Block For Pulling & Displaying Data -->
-    {% for upload in uploads %}
+{% block data %}
     <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="#">{{ upload.creator.user_name }}</a>
           </div>
-          <h2><a class="article-title" href="{{ url_for('upload', upload_id=upload.id) }}">{{ upload.header }}</a></h2>
+          <!--Href to go to the page for the individual post over the header -->
+          <h2 class = "article-title">{{ upload.header }}</h2>
           <!-- Format the Date only-->
           <small class="text-muted">{{ upload.date_uploaded.strftime("%Y-%m-%d") }}</small>
           <p class="article-content">{{ upload.caption }}</p>
 
         </div>
     </article>
-  {% endfor %}
 {% endblock data %}
