@@ -3,7 +3,7 @@ import bcrypt
 from flask import render_template, url_for, flash, redirect
 from flask_login.utils import login_required
 from devops_project import app, db, bcrypt
-from devops_project.forms import RegistrationForm, LoginForm
+from devops_project.forms import RegistrationForm, LoginForm, UploadForm
 from devops_project.models import User, Upload
 from flask_login import login_user, current_user, logout_user
 
@@ -81,7 +81,13 @@ def logout():
     return redirect(url_for("home"))
 
 #create posts and upload to page
-@app.route("/upload")
+@app.route("/upload", methods = ["GET","POST"])
 @login_required
 def new_upload():
-    return render_template("Create_upload.html")
+    form = UploadForm()
+    ##Validation to see if user has successfully uploaded the post
+    if form.validate_on_submit():
+        flash("Your post has been successfully uploaded!", "success")
+        return redirect(url_for("home"))
+    ##Redirect user to the webpage to create a post and uplaod it
+    return render_template("Create_upload.html", form=form)

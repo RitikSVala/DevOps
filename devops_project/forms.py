@@ -34,7 +34,7 @@ class LoginForm(FlaskForm):
      submit = SubmitField("Log In")
      remember = BooleanField('Remember Me')
 
-class PostForm(FlaskForm):
+class UploadForm(FlaskForm):
      header = StringField("Header", validators=[DataRequired()])
      caption = TextAreaField("Content", validators=[DataRequired()])
      submit = SubmitField("Upload")
