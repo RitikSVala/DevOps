@@ -4,7 +4,7 @@ from flask import render_template, url_for, flash, redirect
 from devops_project import app, db, bcrypt
 from devops_project.forms import RegistrationForm, LoginForm
 from devops_project.models import User, Upload
-from flask_login import login_user
+from flask_login import login_user, current_user
 
 ##Temporary Data Set
 uploads = [
@@ -38,6 +38,9 @@ def about():
 ##Get used to retrieve the data & post to insert/update record.
 @app.route("/registerform", methods=['GET','POST'])
 def register():
+    ##Check iff user is logged in and then redirect to home webpage
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     form = RegistrationForm()
     if form.validate_on_submit():
         ##user_password gets hashsed & .decode to change from bites to string
@@ -56,6 +59,8 @@ def register():
 ##GET used to retrieve the data & POST to insert/update record.
 @app.route("/loginform", methods=['GET','POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     form = LoginForm()
     if form.validate_on_submit():
         ##Check if user exists in current database
