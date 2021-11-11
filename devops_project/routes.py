@@ -58,7 +58,7 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.user_email.data =="admin@blog.com" and form.user_password.data == "password":
+        if form.user_email.data =="something@blog.com" and form.user_password.data == "password":
             #Validate Message shows log in was succeessful (parameteres met)
             flash("Log In Successful!", "success")
             ##Redirect user to home page

@@ -1,13 +1,21 @@
+##Databse models and field names for columns in tbles
 from datetime import datetime
 from devops_project import db
+from devops_project import login_manager
+from flask_login import UserMixin
 
+@login_manager.user_loader
+##Function that will reload the user session
+def load_user(user_id):
+    ##return user using the id
+    return User.query.get(int(user_id))
 
 class User(db.Model):
     ##Unique number to define different users also the primary key ("primary_key=True")
     id = db.Column(db.Integer, primary_key=True)
     ##String with a max char value of "20", user_names need to be unique so pass in "unique=true"
     user_name = db.Column(db.String(20), unique=True, nullable=False)
-    ##String with a max char value of "20", user_names need to be unique so pass in "unique=true"
+    ##String with a max char value of "100", user_names need to be unique so pass in "unique=true"
     user_email = db.Column(db.String(100), unique=True, nullable=False)
     ##String with a max char value of "60"
     user_password = db.Column(db.String(60), nullable=False)
