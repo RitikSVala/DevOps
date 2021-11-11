@@ -1,7 +1,10 @@
+##Redirect routes to webpages
+import bcrypt
 from flask import render_template, url_for, flash, redirect
-from devops_project import app
+from devops_project import app, db, bcrypt
 from devops_project.forms import RegistrationForm, LoginForm
 from devops_project.models import User, Upload
+
 
 ##Temporary Data Set
 uploads = [
@@ -37,10 +40,16 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        ##user_password gets hashsed & .decode to change from bites to string
+        hashed_password = bcrypt.generate_password_hash(form.user_password.data).decode('utf-8')
+        ##Create new instance for the user & add user to make changes to the devops database
+        user = User(user_name=form.user_name.data, user_email=form.user_email.data, user_password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
         ##Validation Message
         flash(f'Account has now successfully been created for {form.user_name.data}!', 'success')
         ##Redirect to home page once successful instead of staying static on registration page
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     return render_template("register_form.html", form=form)
 
 ##Assigned URL for Login Page.
