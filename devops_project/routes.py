@@ -1,6 +1,6 @@
 ##Redirect routes to webpages
 import bcrypt
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
 from flask_login.utils import login_required
 from devops_project import app, db, bcrypt
 from devops_project.forms import RegistrationForm, LoginForm, UploadForm
@@ -60,7 +60,7 @@ def logout():
     return redirect(url_for("home"))
 
 #create posts and upload to page
-@app.route("/upload", methods = ["GET","POST"])
+@app.route("/upload/new", methods = ["GET","POST"])
 @login_required
 def new_upload():
     form = UploadForm()
@@ -73,11 +73,34 @@ def new_upload():
         flash("Your post has been successfully uploaded!", "success")
         return redirect(url_for("home"))
     ##Redirect user to the webpage to create a post and uplaod it
-    return render_template("Create_upload.html", form=form)
+    return render_template("Create_upload.html", form=form, legend="New Post")
 
 
 ##Make upload ID a part of the route and pass the variable as an integer
 @app.route("/upload/<int:upload_id>")
 def upload(upload_id):
     upload = Upload.query.get(upload_id)
-    return render_template("upload.html", upload =upload)
+    return render_template("upload.html", upload = upload)
+
+##Edit an existing post, user must be logged in. Display existing data in fields. methods to accept the logic from legend
+@app.route("/upload/<int:upload_id>/update", methods = ["GET","POST"])
+@login_required
+def update_upload(upload_id):
+    upload = Upload.query.get(upload_id)
+    ##Decline access is the current user is not the creator fo the post
+    if upload.creator != current_user:
+        flash("You Do Not Access To This Post!","danger")
+    form = UploadForm()
+    if form.validate_on_submit():
+        upload.header = form.header.data
+        upload.caption = form.caption.data
+        ##Doesn't need db.add because it already exists
+        db.session.commit()
+        flash("Your Post Has Now Been Updated, Thank You!", "success")
+        return redirect(url_for("upload", upload_id=upload.id))
+    elif request.method == "GET":
+        ##Handle the changes made for the legend below
+        form.header.data = upload.header
+        form.caption.data = upload.caption
+    return render_template("Create_upload.html", form =form, legend="Update Post")
+
