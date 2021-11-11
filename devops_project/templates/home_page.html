@@ -5,7 +5,7 @@
     <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2" href="#">{{ upload.creator.user_name }}</a>
+            <a class="mr-2">{{ upload.creator.user_name }}</a>
           </div>
           <h2><a class="article-title" href="{{ url_for('upload', upload_id=upload.id) }}">{{ upload.header }}</a></h2>
           <!-- Format the Date only-->

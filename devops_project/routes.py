@@ -80,7 +80,7 @@ def new_upload():
 @app.route("/upload/<int:upload_id>")
 def upload(upload_id):
     upload = Upload.query.get(upload_id)
-    return render_template("upload.html", upload = upload)
+    return render_template("upload.html", upload=upload)
 
 ##Edit an existing post, user must be logged in. Display existing data in fields. methods to accept the logic from legend
 @app.route("/upload/<int:upload_id>/update", methods = ["GET","POST"])
@@ -104,3 +104,15 @@ def update_upload(upload_id):
         form.caption.data = upload.caption
     return render_template("Create_upload.html", form =form, legend="Update Post")
 
+##Edit an existing post, user must be logged in. Display existing data in fields. methods to accept the logic from legend
+@app.route("/upload/<int:upload_id>/delete", methods = ["POST"])
+@login_required
+def delete_upload(upload_id):
+    upload = Upload.query.get(upload_id)
+    ##Decline access is the current user is not the creator fo the post
+    if upload.creator != current_user:
+        flash("You Do Not Access To This Post!","danger")
+    db.session.delete(upload)
+    db.session.commit()
+    flash("Your post has been successfully deleted!", "success")
+    return redirect(url_for("home"))
