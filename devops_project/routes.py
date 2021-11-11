@@ -4,7 +4,7 @@ from flask import render_template, url_for, flash, redirect
 from devops_project import app, db, bcrypt
 from devops_project.forms import RegistrationForm, LoginForm
 from devops_project.models import User, Upload
-
+from flask_login import login_user
 
 ##Temporary Data Set
 uploads = [
@@ -58,12 +58,12 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.user_email.data =="something@blog.com" and form.user_password.data == "password":
-            #Validate Message shows log in was succeessful (parameteres met)
-            flash("Log In Successful!", "success")
-            ##Redirect user to home page
-            return redirect(url_for('home'))
-        ##If parameters not met (unsuccessful login) Display message to let user know
+        ##Check if user exists in current database
+        user= User.query.filter_by(user_email=form.user_email.data).first()
+        ##check if user exists as well as if the password and user email match
+        if user and bcrypt.check_password_hash(user.user_password, form.user_password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for("home"))
         else:
             flash("Login has been unsuccessful. Try Again!","danger")
     return render_template("login_form.html", form=form)

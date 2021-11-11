@@ -10,7 +10,7 @@ def load_user(user_id):
     ##return user using the id
     return User.query.get(int(user_id))
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     ##Unique number to define different users also the primary key ("primary_key=True")
     id = db.Column(db.Integer, primary_key=True)
     ##String with a max char value of "20", user_names need to be unique so pass in "unique=true"
