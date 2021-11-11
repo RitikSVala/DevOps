@@ -4,9 +4,9 @@ from flask import render_template, url_for, flash, redirect
 from devops_project import app, db, bcrypt
 from devops_project.forms import RegistrationForm, LoginForm
 from devops_project.models import User, Upload
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
 
-##Temporary Data Set
+##Temporary Data Set (HARDCODED)
 uploads = [
         {
             "user": "RITIK VALA",
@@ -72,3 +72,9 @@ def login():
         else:
             flash("Login has been unsuccessful. Try Again!","danger")
     return render_template("login_form.html", form=form)
+
+##Route to log user out back to main homepage
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("home"))

@@ -30,9 +30,14 @@
       <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
       <!-- Right Side Of Navigation Bar -->
       <div class="w3-right w3-hide-small">
+        {% if current_user.is_authenticated %}
+        <a href="/logout" class="w3-bar-item w3-button"><i class="fa fa-user"></i> Sign Out</a>
+        <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+        {% else %}
         <a href="/loginform" class="w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
         <a href="/registerform" class="w3-bar-item w3-button"><i class="fa fa-th"></i> REGISTER</a>
         <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+        {% endif %}
       </div>
       <br>
       <br>
