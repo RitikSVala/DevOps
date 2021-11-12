@@ -1,5 +1,4 @@
 ##Redirect routes to webpages
-import bcrypt
 from flask import render_template, url_for, flash, redirect, request
 from flask_login.utils import login_required
 from devops_project import app, db, bcrypt
