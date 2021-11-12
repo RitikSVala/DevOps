@@ -1,0 +1,27 @@
+{% extends "layout.html"%}<!-- Declare the parent template (layout.html)-->
+{% block data %}
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2">{{ upload.creator.user_name }}</a>
+          </div>
+          <!--Href to go to the page for the individual post over the header -->
+          {% if upload.creator == current_user %}
+            <div>
+              <!-- Update option for users to update existing posts-->
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_upload', upload_id=upload.id) }}">Update Post</a>
+              <!-- Option to delete post created-->
+            </div>
+          {% endif %}
+          <h2 class = "article-title">{{ upload.header }}</h2>
+          <!-- Format the Date only-->
+          <small class="text-muted">{{ upload.date_uploaded.strftime("%Y-%m-%d") }}</small>
+          <p class="article-content">{{ upload.caption }}</p>
+          <form action="{{ url_for('delete_upload', upload_id=upload.id) }}" method="POST">
+            <input class = "btn btn-danger" type="submit" value="Delete Post">
+          </form>
+
+        </div>
+    </article>
+
+{% endblock data %}

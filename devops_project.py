@@ -1,9 +1,12 @@
 from flask import Flask , render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+from models import User, Upload
+
+
+
 app = Flask(__name__) ##Module Name = __name__ = __main__
-
-
 ##Secret Key to protect against modifying cookies etc. (Set secret key for the appication)
 app.config["SECRET_KEY"] = "d7545bde35264afcc836e153c2deabce"
 ##SQLALCHEMY - Set path
