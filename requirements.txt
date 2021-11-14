@@ -11,5 +11,6 @@ wheel
 validators
 flask_bcrypt
 flask_loginmanager
+bdist_wheel
 flask_login
 flask-login
