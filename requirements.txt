@@ -9,5 +9,6 @@ pytest-cov
 tree
 validators
 flask-bcrypt
-flask-loginmanager
-flask-login
+flask_loginmanager
+flask_login
+bdist_wheel
