@@ -1,0 +1,13 @@
+flask
+flask_sqlalchemy
+flask_wtf
+wtforms
+flask_testing
+pymysql
+pytest
+pytest-cov
+tree
+validators
+flask-bcrypt
+flask-loginmanager
+flask-login
