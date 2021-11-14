@@ -33,7 +33,7 @@ class Upload(db.Model):
     ##Header for each post can only be 120 char long and must have data inputed.
     header = db.Column(db.String(120), nullable = False)
     ##Date and time of when the post was made, saves whatever the current time on system is as the date and time
-    date_uploaded = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
+    date_uploaded = db.Column(db.DateTime,nullable = False, default = datetime.utcnow)
     caption = db.Column(db.Text, nullable = False)
     ##This will be the ID of the user (creator) of the post
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"),nullable = False)
