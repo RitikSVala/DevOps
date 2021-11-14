@@ -8,7 +8,7 @@ pytest
 pytest-cov
 tree
 wheel
-bdist_wheel
+wheel python-language-server
 validators
 flask_bcrypt
 flask_loginmanager
