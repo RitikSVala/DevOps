@@ -8,7 +8,7 @@ pytest
 pytest-cov
 tree
 validators
-flask-bcrypt
+flask_bcrypt
 flask_loginmanager
 flask_login
 bdist_wheel
