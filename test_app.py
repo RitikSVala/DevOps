@@ -28,18 +28,18 @@ class TestBase(TestCase):
         db.drop_all()
     
 class TestViews(TestBase):
-    def test_emps_get(self):
+    def registerform(self):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'RitikVala', response.data)
     
-    def test_add_emp(self):
+    def loginform(self):
         response = self.client.post(
-            url_for('saveRecord'),
-            data = dict(emp_name='Jane Smith', department='HR', subject='php', salary=20000, marks=320),
+            url_for('loginform'),
+            data = dict(user_name='RitikVala', user_email='Hi@admin.com', user_password='php'),
             follow_redirects = True
         )
-        self.assertIn(b'Jane Smith', response.data)
+        self.assertIn(b'RitikVala', response.data)
     
     def test_update_emp(self):
         response = self.client.post(
