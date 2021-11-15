@@ -40,42 +40,4 @@ class TestViews(TestBase):
             follow_redirects = True
         )
         self.assertIn(b'RitikVala', response.data)
-    
-    def test_update_emp(self):
-        response = self.client.post(
-            url_for('editRecordForm', empno=1),
-            data = dict(emp_name='Bob Smith', department='IT', subject='php', salary=18000, marks=305),
-            follow_redirects = True
-        )
-        self.assertIn(b'Bob Smith', response.data)
-    
-    def test_del_emp(self):
-        response = self.client.get(url_for('deleteEmployee', empno=1), follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Employee Information System', response.data)
-    
-    def test_emp_info(self):
-        response = self.client.get(url_for('personalInformation', empno=1))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'John Smith', response.data)
-    
-    def test_view_edit(self):
-        response = self.client.get(url_for('editRecordForm', empno=1))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
-    
-    def test_view_add(self):
-        response = self.client.get(url_for('saveRecord'))
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Name', response.data)
-    
-    def test_filter_recs(self):
-        response = self.client.post(url_for('filterrecords'),
-        data = dict(dept='IT'))
-        self.assertIn(b'John Smith', response.data)
-    
-    def test_filter_recs_all(self):
-        response = self.client.post(url_for('filterrecords'),
-        data = dict(dept='all'),
-        follow_redirects = True)
-        self.assertIn(b'John Smith', response.data)
+  
